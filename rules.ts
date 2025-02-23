@@ -1,6 +1,6 @@
-import fs from "fs";
-import { KarabinerRules } from "./types";
-import { createHyperSubLayers, app, open, rectangle, shell } from "./utils";
+import fs from "node:fs";
+import type { KarabinerRules } from "./types";
+import { app, createHyperSubLayers, open, rectangle } from "./utils";
 
 const rules: KarabinerRules[] = [
   // Define the Hyper key itself
@@ -38,26 +38,11 @@ const rules: KarabinerRules[] = [
         ],
         type: "basic",
       },
-      //      {
-      //        type: "basic",
-      //        description: "Disable CMD + Tab to force Hyper Key usage",
-      //        from: {
-      //          key_code: "tab",
-      //          modifiers: {
-      //            mandatory: ["left_command"],
-      //          },
-      //        },
-      //        to: [
-      //          {
-      //            key_code: "tab",
-      //          },
-      //        ],
-      //      },
     ],
   },
   ...createHyperSubLayers({
     spacebar: open(
-      "raycast://extensions/stellate/mxstbr-commands/create-notion-todo"
+      "raycast://extensions/stellate/mxstbr-commands/create-notion-todo",
     ),
     // b = "B"rowse
     b: {
@@ -73,31 +58,14 @@ const rules: KarabinerRules[] = [
     o: {
       1: app("1Password"),
       g: app("Google Chrome"),
-      c: app("Notion Calendar"),
-      v: app("Zed"),
+      c: app("Visual Studio Code"),
       d: app("Discord"),
       s: app("Slack"),
-      e: app("Superhuman"),
-      n: app("Notion"),
-      t: app("Terminal"),
-      // Open todo list managed via *H*ypersonic
-      h: open(
-        "notion://www.notion.so/stellatehq/7b33b924746647499d906c55f89d5026"
-      ),
-      z: app("zoom.us"),
-      // "M"arkdown (Reflect.app)
-      m: app("Reflect"),
-      r: app("Reflect"),
+      e: app("Mimestream"),
+      t: app("iTerm"),
+      m: app("Obsidian"),
       f: app("Finder"),
-      // "i"Message
-      i: app("Texts"),
-      p: app("Spotify"),
-      a: app("iA Presenter"),
-      // "W"hatsApp has been replaced by Texts
-      w: open("Texts"),
-      l: open(
-        "raycast://extensions/stellate/mxstbr-commands/open-mxs-is-shortlink"
-      ),
+      w: app("WhatsApp"),
     },
 
     // TODO: This doesn't quite work yet.
@@ -234,11 +202,11 @@ const rules: KarabinerRules[] = [
         ],
       },
       e: open(
-        `raycast://extensions/thomas/elgato-key-light/toggle?launchType=background`
+        `raycast://extensions/thomas/elgato-key-light/toggle?launchType=background`,
       ),
       // "D"o not disturb toggle
       d: open(
-        `raycast://extensions/yakitrak/do-not-disturb/toggle?launchType=background`
+        `raycast://extensions/yakitrak/do-not-disturb/toggle?launchType=background`,
       ),
       // "T"heme
       t: open(`raycast://extensions/raycast/system/toggle-system-appearance`),
@@ -307,49 +275,25 @@ const rules: KarabinerRules[] = [
       c: open("raycast://extensions/thomas/color-picker/pick-color"),
       n: open("raycast://script-commands/dismiss-notifications"),
       l: open(
-        "raycast://extensions/stellate/mxstbr-commands/create-mxs-is-shortlink"
+        "raycast://extensions/stellate/mxstbr-commands/create-mxs-is-shortlink",
       ),
       e: open(
-        "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
+        "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols",
       ),
       p: open("raycast://extensions/raycast/raycast/confetti"),
       a: open("raycast://extensions/raycast/raycast-ai/ai-chat"),
       s: open("raycast://extensions/peduarte/silent-mention/index"),
       h: open(
-        "raycast://extensions/raycast/clipboard-history/clipboard-history"
+        "raycast://extensions/raycast/clipboard-history/clipboard-history",
       ),
       1: open(
-        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-1"
+        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-1",
       ),
       2: open(
-        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-2"
+        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-2",
       ),
     },
   }),
-  {
-    description: "Change Backspace to Spacebar when Minecraft is focused",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "delete_or_backspace",
-        },
-        to: [
-          {
-            key_code: "spacebar",
-          },
-        ],
-        conditions: [
-          {
-            type: "frontmost_application_if",
-            file_paths: [
-              "^/Users/mxstbr/Library/Application Support/minecraft/runtime/java-runtime-gamma/mac-os-arm64/java-runtime-gamma/jre.bundle/Contents/Home/bin/java$",
-            ],
-          },
-        ],
-      },
-    ],
-  },
 ];
 
 fs.writeFileSync(
@@ -361,7 +305,7 @@ fs.writeFileSync(
       },
       profiles: [
         {
-          name: "Default",
+          name: "DefaultNext",
           complex_modifications: {
             rules,
           },
@@ -369,6 +313,6 @@ fs.writeFileSync(
       ],
     },
     null,
-    2
-  )
+    2,
+  ),
 );
